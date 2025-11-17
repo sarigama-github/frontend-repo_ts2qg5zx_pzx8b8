@@ -1,25 +1,28 @@
 import { useState } from 'react'
+import AppShell from './components/AppShell'
+import ReelFeed from './components/ReelFeed'
+import Spline from '@splinetool/react-spline'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [search, setSearch] = useState('')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
+    <div className="relative min-h-screen">
+      <div className="absolute inset-0">
+        <Spline scene="https://prod.spline.design/WCoEDSwacOpKBjaC/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/80 to-white pointer-events-none dark:from-black/50 dark:via-black/60 dark:to-black" />
+      </div>
+
+      <div className="relative z-10">
+        <AppShell onSearch={setSearch}>
+          <section className="pt-8">
+            <div className="max-w-3xl mx-auto px-4">
+              <h2 className="text-2xl font-semibold mb-2">Discover curated learning reels</h2>
+              <p className="text-slate-600 dark:text-slate-300 mb-6">Swipe through video lessons, roadmaps, free courses and certificates.</p>
+            </div>
+            <ReelFeed query={search} />
+          </section>
+        </AppShell>
       </div>
     </div>
   )
